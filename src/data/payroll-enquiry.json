@@ -1,0 +1,40 @@
+{
+  "title": "Payroll Enquiry",
+  "description": "Please use this form for any Payroll related enquiries.",
+  "fields": [
+    {
+      "id": "related-to",
+      "type": "select",
+      "label": "What does your enquiry relate to?",
+      "options": [
+        "Incorrect Pay",
+        "Missing Expense",
+        "Change of Bank Details",
+        "Change of Address",
+        "Other"
+      ]
+    },
+    {
+      "id": "date",
+      "type": "date",
+      "label": "Date of payslip being queried (if applicable)"
+    },
+    {
+      "id": "query",
+      "type": "textarea"
+    }
+  ],
+  "rules": [
+    {
+      "if": {
+        "type": "valueIn",
+        "fieldId": "related-to",
+        "value": ["Incorrect Pay", "Missing Expense"]
+      },
+      "then": {
+        "type": "valueNotEmpty",
+        "fieldId": "date"
+      }
+    }
+  ]
+}

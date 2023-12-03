@@ -1,7 +1,9 @@
+import DynamicForm from "./components/form/DynamicForm.jsx";
+
 function App() {
   return (
     <main>
-      <h1>Hi</h1>
+      <DynamicForm />
     </main>
   );
 }
