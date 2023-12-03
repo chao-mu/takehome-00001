@@ -21,20 +21,9 @@
     },
     {
       "id": "query",
-      "type": "textarea"
+      "type": "textarea",
+      "label": "Query"
     }
   ],
-  "rules": [
-    {
-      "if": {
-        "type": "valueIn",
-        "fieldId": "related-to",
-        "value": ["Incorrect Pay", "Missing Expense"]
-      },
-      "then": {
-        "type": "valueNotEmpty",
-        "fieldId": "date"
-      }
-    }
-  ]
+  "rules": []
 }
