@@ -6,13 +6,15 @@
       "id": "related-to",
       "type": "select",
       "label": "What does your enquiry relate to?",
-      "options": [
-        "Incorrect Pay",
-        "Missing Expense",
-        "Change of Bank Details",
-        "Change of Address",
-        "Other"
-      ]
+      "props": {
+        "options": [
+          "Incorrect Pay",
+          "Missing Expense",
+          "Change of Bank Details",
+          "Change of Address",
+          "Other"
+        ]
+      }
     },
     {
       "id": "date",
@@ -25,5 +27,19 @@
       "label": "Query"
     }
   ],
-  "rules": []
+  "rules": [
+    {
+      "assert": {
+        "check": "exists",
+        "fieldId": "date"
+      },
+      "if": {
+        "check": "value-in",
+        "fieldId": "related-to",
+        "args": {
+          "values": ["Incorrect Pay", "Missing Expense"]
+        }
+      }
+    }
+  ]
 }

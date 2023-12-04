@@ -1,13 +1,20 @@
-function Select() {
+// PropTypes
+import PropTypes from "prop-types";
+
+function Select({ options, ...props }) {
   return (
-    <>
-      <label htmlFor="relatedTo">What does...?</label>
-      <select type="text" id="relatedTo" name="relatedTo">
-        <option value="Incorrect Pay">Incorrect Pay</option>
-        <option value="Missing Expense">Missing Expense</option>
-      </select>
-    </>
+    <select type="text" {...props}>
+      {options.map((option) => (
+        <option key={option} value={option}>
+          {option}
+        </option>
+      ))}
+    </select>
   );
 }
+
+Select.propTypes = {
+  options: PropTypes.arrayOf(PropTypes.string).isRequired,
+};
 
 export default Select;
