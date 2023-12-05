@@ -1,8 +1,5 @@
-# React + Vite
+# Takehome Exam
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Production URL: https://takehome-pitdhjajn-chao-mu.vercel.app/
 
-Currently, two official plugins are available:
-
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+My apologies, the button is always clickable despite the requirements. However, while this is entirely because I ran out of time, I am willing to defend this as a design decision if we have a chance to talk further.
