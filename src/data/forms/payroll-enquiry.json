@@ -34,12 +34,27 @@
         "fieldId": "date"
       },
       "if": {
-        "check": "value-in",
+        "check": "oneOf",
         "fieldId": "related-to",
         "args": {
-          "values": ["Incorrect Pay", "Missing Expense"]
+          "within": ["Incorrect Pay", "Missing Expense"]
         }
-      }
+      },
+      "message": "Date of payslip is required"
+    },
+    {
+      "assert": {
+        "check": "exists",
+        "fieldId": "related-to"
+      },
+      "message": "Please specify what your issue relates to"
+    },
+    {
+      "assert": {
+        "check": "exists",
+        "fieldId": "query"
+      },
+      "message": "Please describe your issue"
     }
   ]
 }

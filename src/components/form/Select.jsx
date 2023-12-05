@@ -1,9 +1,9 @@
 // PropTypes
 import PropTypes from "prop-types";
 
-function Select({ options, ...props }) {
+function Select({ options, formProps }) {
   return (
-    <select type="text" {...props}>
+    <select type="text" {...formProps}>
       {options.map((option) => (
         <option key={option} value={option}>
           {option}
@@ -14,7 +14,9 @@ function Select({ options, ...props }) {
 }
 
 Select.propTypes = {
+  id: PropTypes.string.isRequired,
   options: PropTypes.arrayOf(PropTypes.string).isRequired,
+  formProps: PropTypes.object.isRequired,
 };
 
 export default Select;

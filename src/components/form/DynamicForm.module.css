@@ -1,11 +1,53 @@
 .parent {
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
+  --form-width: 800px;
+
+  max-width: var(--form-width);
 }
 
 .parent form {
   display: flex;
   flex-direction: column;
-  align-items: start;
+  gap: 0.5rem;
+}
+
+.parent form button {
+  align-self: start;
+  padding: 0.25rem;
+}
+
+.parent hgroup {
+  margin-bottom: 1rem;
+}
+
+.parent hgroup h1 {
+  color: hsl(254, 97%, 13%);
+}
+
+.parent hgroup p {
+  font-style: italic;
+  color: hsl(220, 12%, 43%);
+}
+
+.field-container {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.field {
+  border: 2px solid hsl(218, 51%, 37%);
+  background-color: white;
+  padding: 0.25rem;
+}
+
+textarea.field {
+  height: calc(var(--form-width) / 4);
+}
+
+.error-message {
+  color: red;
+}
+
+.parent form [aria-invalid="true"] {
+  border-color: red;
 }

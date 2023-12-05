@@ -1,12 +1,13 @@
 // PropTypes
 import PropTypes from "prop-types";
 
-function TextArea(props) {
-  return <textarea {...props} />;
+function TextArea({ formProps }) {
+  return <textarea {...formProps} />;
 }
 
 TextArea.propTypes = {
   id: PropTypes.string.isRequired,
+  formProps: PropTypes.object.isRequired,
 };
 
 export default TextArea;

@@ -1,21 +1,31 @@
-// Community
+// PropTypes
 import PropTypes from "prop-types";
 
 function fieldShape({ type, props }) {
-  return {
+  const fields = {
     id: PropTypes.string.isRequired,
     label: PropTypes.string.isRequired,
     type: PropTypes.oneOf([type]),
-    props: props,
   };
+
+  if (props) {
+    fields.props = props;
+  }
+
+  return PropTypes.shape(fields);
 }
 
 function predicateShape({ check, args }) {
-  return {
+  const fields = {
     check: PropTypes.oneOf([check]),
     fieldId: PropTypes.string.isRequired,
-    args: args,
   };
+
+  if (args) {
+    fields.args = args;
+  }
+
+  return PropTypes.shape(fields);
 }
 
 const fieldShapes = [
@@ -43,14 +53,16 @@ const predicateShapes = [
   }),
   // Specified value is within list
   predicateShape({
-    check: "value-in",
-    args: PropTypes.arrayOf(PropTypes.string).isRequired,
+    check: "oneOf",
+    args: PropTypes.shape({
+      within: PropTypes.arrayOf(PropTypes.string).isRequired,
+    }),
   }),
 ];
 
 const ruleShape = {
-  assert: PropTypes.arrayOf(PropTypes.oneOfType(predicateShapes)).isRequired,
-  if: PropTypes.arrayOf(PropTypes.oneOfType(predicateShapes)).isRequired,
+  assert: PropTypes.oneOfType(predicateShapes).isRequired,
+  if: PropTypes.oneOfType(predicateShapes),
 };
 
 export default {

@@ -5,7 +5,13 @@ import { lazy } from "react";
 import { useForm } from "react-hook-form";
 
 // Ours - PropTypes
-import DynamicFormPropTypes from "./DynamicFormPropTypes.js";
+import DynamicFormPropTypes from "./DynamicFormPropTypes";
+
+// Ours - Hooks
+import useValidation from "@/hooks/useValidation";
+
+// Ours - Utils
+import renderEmail from "@/utils/renderEmail";
 
 // Ours - Components
 import Label from "./Label.jsx";
@@ -19,11 +25,18 @@ const componentLookup = {
   textarea: lazy(() => import("./TextArea.jsx")),
 };
 
-function DynamicForm({ title, description, fields }) {
-  const { register, handleSubmit } = useForm();
+function DynamicForm({ title, description, fields, rules }) {
+  const validation = useValidation(rules);
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({
+    resolver: validation,
+  });
 
   const onSubmit = (data) => {
-    console.log(data);
+    console.log(renderEmail({ fields, values: data }));
   };
 
   return (
@@ -33,16 +46,35 @@ function DynamicForm({ title, description, fields }) {
         <p role="doc-subtitle">{description}</p>
       </hgroup>
       <form onSubmit={handleSubmit(onSubmit)}>
-        {fields.map(({ id, label, props, ...field }) => {
-          const FieldComp = componentLookup[field.type];
+        {fields.map(({ id, label, props, type }) => {
+          const FieldComp = componentLookup[type];
+          const error = errors[id];
 
           return (
-            <>
+            <div key={id} className={styles["field-container"]}>
               <Label htmlFor={id}>{label}</Label>
-              <FieldComp key={id} {...props} {...register(id)} />
-            </>
+              <FieldComp
+                id={id}
+                {...props}
+                formProps={{
+                  ...register(id),
+                  "aria-invalid": error ? "true" : "false",
+                  className: styles.field,
+                }}
+              />
+              {error && (
+                <Label
+                  role="alert"
+                  className={styles["error-message"]}
+                  htmlFor={id}
+                >
+                  {error}
+                </Label>
+              )}
+            </div>
           );
         })}
+        <button type="submit">Submit</button>
       </form>
     </section>
   );
